@@ -1,0 +1,38 @@
+1. CREATE SEQUENCE movie_id_sequence INCREMENT 1; - создали последовтельность
+   ALTER TABLE movies ADD COLUMN movie_id INTEGER DEFAULT nextval('movie_id_sequence'); -   добавили новое поле и новую последовательность для этого поля
+
+   связь будет через таблицу 
+CREATE TABLE film_to_producer_and_actor (
+id_film INTEGER NOT NULL,
+id_actor INTEGER NOT NULL,
+id_producer INTEGER NOT NULL);
+
+2. ALTER TABLE producer ADD COLUMN id_film_best INTEGER DEFAULT 0;
+
+3. ALTER TABLE films DROP CONSTRAINT movies;
+   ALTER TABLE films ADD PRIMARY KEY (movie_id);
+
+4.  ALTER TABLE producer ALTER COLUMN motherland SET DEFAULT 'UK';
+
+5. ALTER TABLE actors DROP CONSTRAINT actors_number_of_movies_check;
+
+6. ALTER TABLE movies DROP CONSTRAINT movies_budget_check;
+
+ALTER TABLE movies ADD CONSTRAINT budgetConstraint  CHECK (budget > money(1000)); 
+
+7.  ALTER TABLE movies DROP COLUMN genre;
+	CREATE TABLE genres(id SERIAL PRIMARY KEY,type VARCHAR(20));
+	ALTER TABLE movies ADD genre_id INTEGER REFERENCES genres(id);
+
+8. ALTER TABLE actors DROP motherland;
+   ALTER TABLE producer DROP motherland;
+   CREATE TYPE countries as ENUM('USA', 'UK', 'RUSSIA', 'FRANCE', 'GERMANY'); 
+   ALTER TABLE actors ADD motherland countries;
+   ALTER TABLE producer ADD motherland countries;
+
+9. ALTER TABLE actors ADD CONSTRAINT birthday_check CHECK (birthday <= CURRENT_DATE);
+   ALTER TABLE producer ADD CONSTRAINT birthday_check CHECK (birthday <= CURRENT_DATE); 
+
+10. CREATE INDEX ON actors(name, surname)
+
+11.
