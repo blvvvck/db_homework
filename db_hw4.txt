@@ -35,4 +35,4 @@ ALTER TABLE movies ADD CONSTRAINT budgetConstraint  CHECK (budget > money(1000))
 
 10. CREATE INDEX ON actors(name, surname)
 
-11.
+11. UPDATE movies SET name = (name, '(', year, ')');
