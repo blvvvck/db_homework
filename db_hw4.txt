@@ -1,0 +1,46 @@
+ALTER TABLE movies ADD movie_id SERIAL PRIMARY KEY;
+
+ALTER TABLE movies ADD movie_id SERIAL PRIMARY KEY;
+
+ALTER TABLE actors ADD movie_id INTEGER REFERENCES movies (movie_id);
+
+ALTER TABLE producer ADD movie_id INTEGER REFERENCES movies (movie_id);
+ALTER TABLE producer ADD best_movie_id INTEGER REFERENCES movies (movie_id);
+
+ALTER TABLE movies ALTER country SET DEFAULT 'UK';
+
+ALTER TABLE actors DROP CONSTRAINT actors_number_of_movies_check;
+
+ALTER TABLE movies ADD CONSTRAINT min_budget CHECK (budget > 1000);
+
+CREATE TABLE genres (
+  id   SERIAL PRIMARY KEY,
+  name VARCHAR(50)
+);
+
+ALTER TABLE movies
+  DROP genres,
+  ADD genre_id INTEGER REFERENCES genres (id);
+
+
+CREATE TYPE COUNTRY AS ENUM ('USA', 'UK', 'Russia', 'France', 'Germany');
+
+ALTER TABLE actors
+  DROP motherland,
+  ADD motherland COUNTRY;
+
+  ALTER TABLE producer
+  DROP motherland,
+  ADD motherland COUNTRY;
+
+  ALTER TABLE actors
+  ADD CONSTRAINT ch_right_date CHECK (birthday <= CURRENT_DATE);
+
+  ALTER TABLE producer
+  ADD CONSTRAINT ch_right_date CHECK (birthday <= CURRENT_DATE);
+
+  CREATE INDEX ON actors (name, urname);
+
+  
+UPDATE movies SET name = concat(name, '(', year, ')');
+

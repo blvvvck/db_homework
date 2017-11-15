@@ -1,0 +1,30 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 CREATE TABLE movies (\
+  name        VARCHAR(50),\
+  description TEXT,\
+  year        SMALLINT CHECK (year > 1900 AND year < date_part('year', CURRENT_DATE) + 10),\
+  genres      VARCHAR(50),\
+  country     VARCHAR(50),\
+  budget      NUMERIC CHECK (budget > 10000)\
+);\
+\
+CREATE TABLE actors (\
+  surname VARCHAR(50) UNIQUE,\
+  name VARCHAR(50) UNIQUE,\
+  birthday DATE,\
+  motherland VARCHAR(50),\
+  number_of_movies INTEGER CHECK (number_of_movies > 5)\
+);\
+\
+CREATE TABLE producer (\
+  urname    VARCHAR(50) UNIQUE,\
+  name       VARCHAR(50) UNIQUE,\
+  birthday   DATE,\
+  motherland VARCHAR(50) DEFAULT 'USA'\
+);}
